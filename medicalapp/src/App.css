@@ -1,0 +1,18 @@
+
+.home{
+    font-size: x-large;
+}
+
+.nav{
+    background-color: #123C69;
+    display: flex;
+    justify-content: space-around;
+}
+.nav-item{
+    color: white;
+    width:200px;
+}
+textarea{
+    width:300px;
+    height:100px;
+}
