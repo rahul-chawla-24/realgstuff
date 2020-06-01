@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Landing from "./landing";
 import Navbar from "./navbar";
 import Quiz from "./quiz";

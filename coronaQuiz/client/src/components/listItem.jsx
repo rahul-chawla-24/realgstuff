@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, Route, Link } from "react-router-dom";
 import { resultAction } from "../actions/actions";
-import { MDBInput } from "mdbreact";
 
 class ListItem extends Component {
 

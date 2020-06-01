@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect, Route, Link } from "react-router-dom";
 import {
   MDBContainer,
   MDBRow,
@@ -128,7 +127,7 @@ class Landing extends Component {
                           <MDBIcon far icon="paper-plane" className="ml-2" />
                         </MDBBtn>
                       </div>
-                      {this.state.toQuiz && <Redirect to="/quiz" />}
+                      {/* {this.state.toQuiz && <Redirect to="/quiz" />} */}
                     </form>
                   </MDBCardBody>
                 </MDBCard>
