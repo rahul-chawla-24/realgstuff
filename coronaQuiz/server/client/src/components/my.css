@@ -1,0 +1,9 @@
+.quiz{
+    display: flex;
+    justify-content: center;
+}
+
+.submitButton {
+    display: flex;
+    align-self: flex-end;
+}
