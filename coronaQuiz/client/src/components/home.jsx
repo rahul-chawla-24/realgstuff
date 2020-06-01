@@ -6,12 +6,12 @@ import Landing from "./landing";
 import Navbar from "./navbar";
 import Quiz from "./quiz";
 import Result from "./result";
-
+import '../App.css'
 
 class Home extends Component {
   render() {
     return (
-      <div>
+      <div className="full-height">
         <Navbar />
         <Switch>
           <Route exact path="/" component={Landing} />

@@ -9,7 +9,9 @@ import {
   MDBCard,
   MDBCardBody,
 } from "mdbreact";
+import Background from '../components/question.jpg'
 import { sendUserDetails } from "../actions/actions.js";
+import '../App.css' 
 
 class Landing extends Component {
   state = {
@@ -59,7 +61,10 @@ class Landing extends Component {
       window.location.href = `/quiz`;
     }
     return (
-      <div className="container-fluid d-flex justify-content-center">
+      <div className="container-fluid d-flex justify-content-center full-height style1" 
+      style={{
+        backgroundImage : `url(${Background})`,
+       }}>
         <div className="mt-5">
           <MDBContainer>
             <MDBRow>

@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "client" : "cd ../client && npm start",
+    "start": "nodemon ./bin/www",
+    "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon ./bin/www\" \"npm run client\""
+
   },
   "dependencies": {
+    "concurrently": "^5.2.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
