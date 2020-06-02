@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "client" : "cd client && npm start",
-    "start": "nodemon ./bin/www",
+    "start": "set NODE_ENV=dev && nodemon ./bin/www",
      "build" : "cd client && npm run build",
      "install-client" : "cd client && npm install",
-    "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon ./bin/www\" \"npm run client\"",
+    "dev": "concurrently -n 'server,client' -c 'red,green' \"npm start\" \"npm run client\"",
     "heroku-postbuild" : "npm run install-client && npm run "
 
   },
