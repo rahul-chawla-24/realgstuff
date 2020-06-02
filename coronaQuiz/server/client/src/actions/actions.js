@@ -14,7 +14,7 @@ export const sendUserDetails = ({firstName,lastName,email}) => async (dispatch) 
     email,
   };
 
-  let user = await axios.post("http://localhost:5500/user/add", body, config);
+  let user = await axios.post("/user/add", body, config);
   dispatch({
     type: "USER_ADDED",
     payload: user.data,
@@ -23,7 +23,7 @@ export const sendUserDetails = ({firstName,lastName,email}) => async (dispatch) 
 
 export const fetchQuizQuestions = () => async (dispatch) => {
 
-  let questions =  await axios.get('http://localhost:5500/questions/all');
+  let questions =  await axios.get('/questions/all');
     dispatch({
         type : "FETCH_QUESTIONS",
         payload : questions.data
