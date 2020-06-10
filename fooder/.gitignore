@@ -1,0 +1,4 @@
+node_modules/
+#Developers Working on Mac Adding the below line
+.DS_Store
+npm-debug.log
