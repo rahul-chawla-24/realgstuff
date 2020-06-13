@@ -1,0 +1,209 @@
+.slider {
+  display: block;
+  padding: 0 55px;
+}
+.carousel-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.play-button {
+  color: white;
+  transition: "transform 350ms ease";
+}
+.play-button:hover {
+  color: #0088de;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+  font-size: 8rem;
+  font-family: "Helvetica";
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+    0 20px 20px rgba(0, 0, 0, 0.15);
+}
+.carousel-text {
+  font-family: "Helvetica";
+  font-weight: bold;
+  color: white;
+  text-shadow: 0px 15px 5px rgba(0, 0, 0, 0.1),
+    10px 20px 5px rgba(0, 0, 0, 0.05), -10px 20px 5px rgba(0, 0, 0, 0.05);
+}
+.my-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.slide-image {
+  border-radius: 5px;
+}
+
+.my-text-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+.zoom {
+  transition: transform 200ms ease-out 100ms; /* Animation */
+}
+
+.zoom:hover {
+  transform: perspective(500px) scale3d(1.2, 1.1, 0.7);
+  -webkit-filter: grayscale(70%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(70%);
+}
+
+.carousel-overlay {
+  position: absolute;
+  width: 17rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.slide-image-overlay {
+  position: fixed;
+  border-radius: 5px;
+  width: 14rem;
+  height: 15rem;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  transform: "translate3d(0,50px,0)";
+  transition: "transform 350ms ease";
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.zoom:hover .slide-image-overlay  {
+  display: block;
+}
+
+
+.watchlist-button{
+display: block;
+}
+.watchlist-button-overlay{
+  position: fixed;
+ color: black;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  transform: "translate3d(0,50px,0)";
+  transition: "transform 350ms ease";
+}
+.watchlist-button:hover .watchlist-button-overlay{
+  display: block;
+}
+.slick-prev {
+  left: 3% !important;
+  z-index: 1;
+}
+.slick-next {
+  right: 3% !important;
+  z-index: 1;
+}
+
+.slick-prev:before {
+  /* background-color: blue !important;  */
+  width: 50px;
+  height: 50px;
+  content: "" !important;
+  position: absolute;
+  top: -11px;
+  left: -31px;
+  background-image: url("./arrows.png");
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  background-size: 26px;
+  opacity: 1 !important;
+}
+
+.slick-next:before {
+  /* background-color: blue !important; */
+  width: 26px;
+  height: 26px;
+  content: "" !important;
+  position: absolute;
+  top: -11px;
+  left: 0px;
+  background-image: url("./multimedia-option.png");
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  background-size: 26px;
+  opacity: 1 !important;
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+.slide-image {
+  width: 5rem;
+  height: 14rem;
+}
+.slide-image-overlay {
+  width: 5rem;
+  height: 14rem;
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 1100px) {}
+.slide-image {
+  width: 9rem;
+  height: 14rem;
+}
+.slide-image-overlay {
+  width: 9rem;
+  height: 14rem;
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .slide-image {
+    width: 11rem;
+    height: 14rem;
+  }
+  .slide-image-overlay {
+    width: 11rem;
+    height: 14rem;
+  }
+}
+@media only screen and (min-width: 1300px) {
+  .slide-image {
+    width: 12rem;
+    height: 14rem;
+  }
+  .slide-image-overlay {
+    width: 12rem;
+    height: 14rem;
+  }
+}
+@media only screen and (min-width: 1400px) {
+  .slide-image {
+    width: 13rem;
+    height: 15rem;
+    
+  }
+  .slide-image-overlay {
+    width: 13rem;
+    height: 15rem;
+  }
+}
