@@ -3,7 +3,7 @@ import axios from "axios";
 export const search = () => async (dispatch) => {
   let movieUrl = "http://localhost:5500/movie/all";
   if (process.env.NODE_ENV === "production") {
-    url = "/movie/all";
+    movieUrl = "/movie/all";
   }
   let moviesFetched = await axios.get(movieUrl);
   await dispatch({
@@ -12,7 +12,7 @@ export const search = () => async (dispatch) => {
   });
   let showUrl = "http://localhost:5500/show/all";
   if (process.env.NODE_ENV === "production") {
-    url = "/show/all";
+    showUrl = "/show/all";
   }
   let showsFetched = await axios.get(showUrl);
   await dispatch({
@@ -26,7 +26,7 @@ export const search = () => async (dispatch) => {
 
   let genreUrl = "http://localhost:5500/genre/all";
   if (process.env.NODE_ENV === "production") {
-    url = "/genre/all";
+    genreUrl = "/genre/all";
   }
   let genreFetched = await axios.get(genreUrl);
   await dispatch({

@@ -45,17 +45,10 @@ class Landing extends Component {
         <div id="info"></div>
         <div className="row">
           <div className="col-md-12">
-            <div className="footer p-3 mt-4 text-center bg-dark text-light">
+            <div className="footer p-3 mt-4 text-center bg-dark white-text font-weight-bold">
               Developed By:
               <br></br>
-              <span className="text-warning font-weight-normal">
-                <a
-                  href="https://www.linkedin.com/in/rishu-raj-308263172/"
-                  target="_blank"
-                >
-                  Rishu Raj
-                </a>
-                <br></br>
+              <span className="white-text font-weight-bold">
                 <a>Rahul Chawla</a>
               </span>
             </div>

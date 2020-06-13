@@ -8,6 +8,7 @@ import {
   MDBBtn,
   MDBInput,
   MDBIcon,
+  MDBAlert,
 } from "mdbreact";
 import { connect } from "react-redux";
 import "./my.css";
@@ -34,54 +35,51 @@ class SignupModal extends Component {
     });
   }
   handleFirstNamechange(event) {
-    this.setState(
-      {
-        firstName: event.target.value,
-      },
-      console.log(this.state)
-    );
+    this.setState({
+      firstName: event.target.value,
+    });
   }
   handleLastNamechange(event) {
-    this.setState(
-      {
-        lastName: event.target.value,
-      },
-      console.log(this.state)
-    );
+    this.setState({
+      lastName: event.target.value,
+    });
   }
   handleEmailchange(event) {
-    this.setState(
-      {
-        email: event.target.value,
-      },
-      console.log(this.state)
-    );
+    this.setState({
+      email: event.target.value,
+    });
   }
   handlePasswordchange(event) {
-    this.setState(
-      {
-        password: event.target.value,
-      },
-      console.log(this.state)
-    );
+    this.setState({
+      password: event.target.value,
+    });
   }
   handleSubmit() {
     console.log(this.state);
     console.log(register);
-
     const { firstName, lastName, email, password } = this.state;
+    if (!firstName || !lastName || !email || !password) {
+      alert("please enter all details");
+      return;
+    }
+    if (password.length < 8) {
+      alert("password length must be of 8 digits");
+      return;
+    }
     this.props.register({ firstName, lastName, email, password });
   }
   render() {
     return (
       <div>
-        <button className="font-weight-bold navbarItem myButton p-2 mr-1" 
-         onClick={() => this.handleModal()}>
+        <button
+          className="font-weight-bold navbarItem myButton p-2 mr-1"
+          onClick={() => this.handleModal()}
+        >
           Sign Up
         </button>
         <Modal show={this.state.show}>
           <Modal.Body>
-          <Button onClick={() => this.closebutton()}>
+            <Button onClick={() => this.closebutton()}>
               <MDBIcon icon="times" />
             </Button>
             <MDBContainer>
@@ -148,6 +146,13 @@ class SignupModal extends Component {
                       </MDBBtn>
                     </div>
                   </form>
+                  <div>
+                    {this.props.registerMessage && (
+                      <MDBAlert color="success" className="mt-2">
+                        User registered. Please login to continue
+                      </MDBAlert>
+                    )}
+                  </div>
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
@@ -160,7 +165,9 @@ class SignupModal extends Component {
 
 const mapstatetoprops = (state) => {
   //   Newstate : state
-  return state;
+  return {
+    registerMessage: state.auth.registerMessage,
+  };
 };
 
 export default connect(mapstatetoprops, { register })(SignupModal);

@@ -41,7 +41,7 @@ class APSlider extends React.Component {
                             : `/shows/${content.id}`
                         }
                       >
-                        <div className="mt-5 p-1 d-flex justify-content-center">
+                        <div className="mt-4 p-1 d-flex justify-content-center">
                           <IconButton aria-lable="delete">
                             <PlayCircleFilledIcon
                               fontSize="large"
@@ -62,7 +62,7 @@ class APSlider extends React.Component {
                       >
                         {content.overview}
                       </p>
-                      <div className="mr-3">
+                      <div className="mr-3 mt-2">
                         <button
                           className="myButton float-right"
                           title="This feature is coming soon"
@@ -70,7 +70,7 @@ class APSlider extends React.Component {
                           <MDBIcon
                             icon="folder-plus"
                             size="2x"
-                            className="white-text "
+                            className="white-text"
                           />
                         </button>
                       </div>

@@ -72,8 +72,8 @@ class LoginModal extends Component {
             <MDBContainer>
               <MDBRow>
                 <MDBCol>
-                  <Facebook /> <br></br>
-                  <h5 className="h5 text-center mb-4">OR</h5>
+                  {/* <Facebook /> <br></br> */}
+                  {/* <h5 className="h5 text-center mb-4">OR</h5> */}
                   <form>
                     <p className="h5 text-center mb-4">Login with email</p>
                     <div className="grey-text">
