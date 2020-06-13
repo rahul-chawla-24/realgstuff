@@ -1,38 +1,48 @@
-import axios from 'axios' ;
+import axios from "axios";
 
 export const search = () => async (dispatch) => {
+  let movieUrl = "http://localhost:5500/movie/all";
+  if (process.env.NODE_ENV === "production") {
+    url = "/movie/all";
+  }
+  let moviesFetched = await axios.get(movieUrl);
+  await dispatch({
+    type: "SEARCH_MOVIES_FETCHED",
+    payload: moviesFetched.data,
+  });
+  let showUrl = "http://localhost:5500/show/all";
+  if (process.env.NODE_ENV === "production") {
+    url = "/show/all";
+  }
+  let showsFetched = await axios.get(showUrl);
+  await dispatch({
+    type: "SEARCH_SHOWS_FETCHED",
+    payload: showsFetched.data,
+  });
 
-    let moviesFetched = await axios.get("http://localhost:3000/movie/all");
-   await dispatch({
-        type : "SEARCH_MOVIES_FETCHED",
-        payload : moviesFetched.data
-    })
-    let showsFetched = await axios.get("http://localhost:3000/show/all");
-    await dispatch({
-        type : "SEARCH_SHOWS_FETCHED",
-        payload : showsFetched.data
-    })
+  await dispatch({
+    type: "SEARCH_COMBINE_BOTH",
+  });
 
-    await dispatch({
-        type : "SEARCH_COMBINE_BOTH",
-    })
-    
-    let genreFetched = await axios.get("http://localhost:3000/genre/all");
-    await dispatch({
-        type : "SEARCH_GENRE_FETCHED",
-        payload : genreFetched.data
-    });
+  let genreUrl = "http://localhost:5500/genre/all";
+  if (process.env.NODE_ENV === "production") {
+    url = "/genre/all";
+  }
+  let genreFetched = await axios.get(genreUrl);
+  await dispatch({
+    type: "SEARCH_GENRE_FETCHED",
+    payload: genreFetched.data,
+  });
 
-    await dispatch({
-        type : "SEARCH"
-    })
+  await dispatch({
+    type: "SEARCH",
+  });
 };
 
 export const setSearchItem = (item) => (dispatch) => {
-    console.log('searchAction', item);
-    dispatch({
-        type : "SET_SEARCH_ITEM",
-        payload : item
-    });
-}
-
+  console.log("searchAction", item);
+  dispatch({
+    type: "SET_SEARCH_ITEM",
+    payload: item,
+  });
+};

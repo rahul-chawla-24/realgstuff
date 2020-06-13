@@ -15,13 +15,16 @@ import {
 export const loadUser = () => (dispatch, getState) => {
   // User loading
   dispatch({ type: USER_LOADING });
-
+  let url = "http://localhost:5500/auth/user";
+  if (process.env.NODE_ENV === "production") {
+    url = "/auth/user";
+  }
   axios
-    .get("http://localhost:3000/auth/user", tokenConfig(getState))
+    .get(url, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: USER_LOADED,
-        payload: `${res.data.firstName} ${res.data.lastName}`
+        payload: `${res.data.firstName} ${res.data.lastName}`,
       })
     )
     .catch((err) => {
@@ -51,10 +54,12 @@ export const register = ({ firstName, lastName, email, password }) => async (
     password,
   };
   console.log(body);
-  
-  
+  let url = "http://localhost:5500/auth/register";
+  if (process.env.NODE_ENV === "production") {
+    url = "/auth/register";
+  }
   axios
-    .post("http://localhost:3000/auth/register", body, config)
+    .post(url, body, config)
     .then((res) =>
       dispatch({
         type: REGISTER_SUCCESS,
@@ -67,12 +72,10 @@ export const register = ({ firstName, lastName, email, password }) => async (
       // );
       dispatch({
         type: REGISTER_FAIL,
-        payload:"Inavlid Input"
+        payload: "Inavlid Input",
       });
     });
-
 };
-
 
 // Login User
 export const login = ({ email, password }) => (dispatch) => {
@@ -85,9 +88,12 @@ export const login = ({ email, password }) => (dispatch) => {
 
   // Request body
   const body = { email, password };
-
+  let url = "http://localhost:5500/auth/create-session";
+  if (process.env.NODE_ENV === "production") {
+    url = "/auth/create-session";
+  }
   axios
-    .post("http://localhost:3000/auth/create-session", body, config)
+    .post(url, body, config)
     .then((res) =>
       dispatch({
         type: LOGIN_SUCCESS,
