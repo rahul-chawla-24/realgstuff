@@ -1,37 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  Container,
-  Col,
-  Row,
-  Card,
-  Button,
-  Tooltip,
-  OverlayTrigger,
-} from "react-bootstrap";
-import {
-  Manager,
-  Reference,
-  Popper,
-
-} from "react-popper";
 import "./slider.css";
 import Slider from "react-slick";
-import styled from "@emotion/styled/macro";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import ExplicitIcon from "@material-ui/icons/Explicit";
-import { IconButton } from "@material-ui/core";
-import axios from "axios";
-
-function renderTooltip(props) {
-  return (
-    <Tooltip id="button-tooltip" {...props}>
-      <div className="bg-white" style={{ width: "100px", height: "100px" }}>
-        <p className="text-dark">New</p>
-      </div>
-    </Tooltip>
-  );
-}
 
 class APSliderTwo extends React.Component {
   render() {

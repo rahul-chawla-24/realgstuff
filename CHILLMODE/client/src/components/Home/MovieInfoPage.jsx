@@ -4,7 +4,7 @@ import { Container, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import ExplicitIcon from "@material-ui/icons/Explicit";
 import SubtitlesRoundedIcon from "@material-ui/icons/SubtitlesRounded";
-import { MDBIcon, MDBBtn } from "mdbreact";
+import { MDBIcon } from "mdbreact";
 import APSlider from "../slider/slider";
 import "./my.css";
 // import Footer from "../Layout/Footer"

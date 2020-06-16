@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
-import Facebook from "../Oauth/Facebook";
-import Google from "../Oauth/Google";
+import { clearErrors } from "../../actions/errorActions";
 import { login } from "../../actions/authActions";
 import {
   MDBContainer,
@@ -10,6 +9,7 @@ import {
   MDBInput,
   MDBBtn,
   MDBIcon,
+  MDBAlert,
 } from "mdbreact";
 import { connect } from "react-redux";
 import "./my.css";
@@ -34,6 +34,7 @@ class LoginModal extends Component {
     });
   }
   handleEmailchange(event) {
+    this.props.clearErrors();
     this.setState(
       {
         email: event.target.value,
@@ -42,6 +43,7 @@ class LoginModal extends Component {
     );
   }
   handlePasswordchange(event) {
+    this.props.clearErrors();
     this.setState(
       {
         password: event.target.value,
@@ -60,8 +62,10 @@ class LoginModal extends Component {
   render() {
     return (
       <div>
-       <button className="font-weight-bold navbarItem myButton p-2" 
-         onClick={() => this.handleModal()}>
+        <button
+          className="font-weight-bold navbarItem myButton p-2"
+          onClick={() => this.handleModal()}
+        >
           Login
         </button>
         <Modal show={this.state.show}>
@@ -85,14 +89,18 @@ class LoginModal extends Component {
                         validate
                         error="wrong"
                         success="right"
-                        onChange={(event)=>{this.handleEmailchange(event)}}
+                        onChange={(event) => {
+                          this.handleEmailchange(event);
+                        }}
                       />
                       <MDBInput
                         label="Type your password"
                         icon="lock"
                         group
                         type="password"
-                        onChange={(event)=>{this.handlePasswordchange(event)}}
+                        onChange={(event) => {
+                          this.handlePasswordchange(event);
+                        }}
                       />
                     </div>
                     <div className="text-center">
@@ -106,6 +114,13 @@ class LoginModal extends Component {
                       </MDBBtn>
                     </div>
                   </form>
+                  <div>
+                    {this.props.msg && (
+                      <MDBAlert color="danger" className="mt-2">
+                        {this.props.msg}
+                      </MDBAlert>
+                    )}
+                  </div>
                 </MDBCol>
               </MDBRow>
             </MDBContainer>
@@ -120,7 +135,8 @@ const mapstatetoprops = (state) => {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
+    msg: state.error.msg,
   };
 };
 
-export default connect(mapstatetoprops, { login })(LoginModal);
+export default connect(mapstatetoprops, { login, clearErrors })(LoginModal);

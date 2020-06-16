@@ -180,12 +180,12 @@ h4.overview {
   margin-top: 3rem;
   color: white;
 }
-select {
+/* select {
   width: 9rem;
   padding: 1rem;
   background-color: gray;
   color: white;
-}
+} */
 
 /* .dropdown {
   margin-top: 7rem;
@@ -209,10 +209,21 @@ button#trailer {
   margin-left: 6rem;
 }
 
+.episodes-image{
+  height: 12rem;
+  width: 20rem;
+}
+.episodes-overview{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
 .episodes {
   background-color: rgba(27, 37, 48, 0.8);
   color: white;
-  margin-top: 2rem;
+  height: 12rem;
 }
 button.episode.button.play.col-sm-1.btn.btn-primary {
   margin-left: 0rem;

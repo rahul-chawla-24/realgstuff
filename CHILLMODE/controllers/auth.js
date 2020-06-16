@@ -6,17 +6,16 @@ const validator = require("validator");
 
 // validation for signup
 function validateSignupForm(payload) {
-  const errors = {};
+  let errors = "";
   let isFormValid = true;
   let message = "";
-
   if (
     !payload ||
     typeof payload.email !== "string" ||
     !validator.isEmail(payload.email)
   ) {
     isFormValid = false;
-    errors.email = "Please provide a correct email address.";
+    errors = "Please provide a correct email address.";
   }
 
   if (
@@ -25,7 +24,7 @@ function validateSignupForm(payload) {
     payload.password.trim().length < 8
   ) {
     isFormValid = false;
-    errors.password = "Password must have at least 8 characters.";
+    errors = "Password must have at least 8 characters.";
   }
 
   if (
@@ -34,7 +33,7 @@ function validateSignupForm(payload) {
     payload.firstName.trim().length === 0
   ) {
     isFormValid = false;
-    errors.name = "Please provide your full name.";
+    errors = "Please provide your full name.";
   }
 
   if (
@@ -43,13 +42,13 @@ function validateSignupForm(payload) {
     payload.lastName.trim().length === 0
   ) {
     isFormValid = false;
-    errors.name = "Please provide your full name.";
+    errors = "Please provide your full name.";
   }
 
   if (!isFormValid) {
-    message = "Check the form for errors.";
+    message = errors;
   }
-
+  console.log(message)
   return {
     success: isFormValid,
     message,
@@ -59,7 +58,7 @@ function validateSignupForm(payload) {
 
 // validation for login
 function validateLoginForm(payload) {
-  const errors = {};
+  let errors = {};
   let isFormValid = true;
   let message = "";
 
@@ -69,7 +68,7 @@ function validateLoginForm(payload) {
     payload.email.trim().length === 0
   ) {
     isFormValid = false;
-    errors.email = "Please provide your email address.";
+    errors = "Please provide your email address.";
   }
 
   if (
@@ -78,11 +77,11 @@ function validateLoginForm(payload) {
     payload.password.trim().length === 0
   ) {
     isFormValid = false;
-    errors.password = "Please provide your password.";
+    errors = "Please provide your password.";
   }
 
   if (!isFormValid) {
-    message = "Check the form for errors.";
+    message = errors;
   }
 
   return {
@@ -95,7 +94,7 @@ function validateLoginForm(payload) {
 module.exports.signUp = (req, res, next) => {
   const validationResult = validateSignupForm(req.body);
   if (!validationResult.success) {
-    return res.status(200).json({
+    return res.status(400).json({
       success: false,
       message: validationResult.message,
       errors: validationResult.errors,

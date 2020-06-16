@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logout } from "../actions/authActions";
+import { logout , guestLogin  } from "../actions/authActions";
 import { Redirect, Link } from "react-router-dom";
 import { setSearchItem } from "../actions/searchActions";
 import {
@@ -121,18 +121,13 @@ class NavbarPage extends Component {
                     />
                   </div>
                   <div>
-                    {this.state.searchTerm && <Link to={`/search?item=${this.state.searchTerm}`}>
-                    <button
-                      className="myButton mr-sm-2"
-                      title="Search"
-                    >
-                      <MDBIcon
-                        icon="search"
-                        
-                        className="white-text "
-                      />
-                    </button>
-                    </Link>}
+                    {this.state.searchTerm && (
+                      <Link to={`/search?item=${this.state.searchTerm}`}>
+                        <button className="myButton mr-sm-2" title="Search">
+                          <MDBIcon icon="search" className="white-text " />
+                        </button>
+                      </Link>
+                    )}
                   </div>
                 </MDBFormInline>
               </MDBNavItem>
@@ -160,6 +155,16 @@ class NavbarPage extends Component {
             )}
             {!this.props.isAuthenticated && (
               <MDBNavItem>
+                <button
+                  className="font-weight-bold navbarItem myButton p-2"
+                  onClick={() => this.props.guestLogin()}
+                >
+                  Guest
+                </button>
+              </MDBNavItem>
+            )}
+            {!this.props.isAuthenticated && (
+              <MDBNavItem>
                 <SignupModal />
               </MDBNavItem>
             )}
@@ -182,4 +187,4 @@ const stateMapper = (state) => {
   };
 };
 
-export default connect(stateMapper, { logout, setSearchItem })(NavbarPage);
+export default connect(stateMapper, { logout, setSearchItem , guestLogin})(NavbarPage);

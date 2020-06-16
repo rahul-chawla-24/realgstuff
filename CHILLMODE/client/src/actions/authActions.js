@@ -58,6 +58,7 @@ export const register = ({ firstName, lastName, email, password }) => async (
   if (process.env.NODE_ENV === "production") {
     url = "/auth/register";
   }
+
   axios
     .post(url, body, config)
     .then((res) =>
@@ -67,9 +68,10 @@ export const register = ({ firstName, lastName, email, password }) => async (
       })
     )
     .catch((err) => {
-      // dispatch(
-      //   returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
-      // );
+      dispatch(
+        returnErrors(err.response.data.message , err.response.status, "REGISTER_FAIL")
+      );
+      console.log("err",err.response)
       dispatch({
         type: REGISTER_FAIL,
         payload: "Inavlid Input",
@@ -101,9 +103,9 @@ export const login = ({ email, password }) => (dispatch) => {
       })
     )
     .catch((err) => {
-      // dispatch(
-      //   returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")
-      // );
+      dispatch(
+        returnErrors(err.response.data.message, err.response.status, "LOGIN_FAIL")
+      );
       dispatch({
         type: LOGIN_FAIL,
       });
@@ -117,6 +119,36 @@ export const logout = () => {
   };
 };
 
+export const guestLogin = () => (dispatch) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  // Request body
+  const email = "rahul@gmail.com";
+  const password = "rahulchawla";
+  const body = {email, password};
+  let url = "http://localhost:5500/auth/create-session";
+  if (process.env.NODE_ENV === "production") {
+    url = "/auth/create-session";
+  }
+  axios
+    .post(url, body, config)
+    .then((res) =>
+      dispatch({
+        type: "GUEST_LOGIN",
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+    });
+};
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
   // Get token from localstorage

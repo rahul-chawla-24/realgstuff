@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { search, setSearchItem } from "../actions/searchActions";
 import queryString from "query-string";
@@ -30,12 +30,22 @@ class Search extends React.Component {
       <Container fluid className="mt-5">
         {/* {this.props.searchResult && <APSlider contents={this.props.searchResult} />} */}
         <div>
-          {this.props.searchItem && (
-            <h5 className="text-muted font-weight-bolder mt-1 mb-1 d-flex justify-content-center">
-              {" "}
-              {`Search result for "` + this.props.searchItem + `".`}
-            </h5>
-          )}
+          {this.props.searchItem &&
+            this.props.searchResult &&
+            this.props.searchResult.length && (
+              <h5 className="text-muted font-weight-bolder mt-1 mb-1 d-flex justify-content-center">
+                {" "}
+                {`Search result for "` + this.props.searchItem + `".`}
+              </h5>
+            )}
+          {
+            this.props.searchResult &&
+            !this.props.searchResult.length && (
+              <h5 className="text-muted font-weight-bolder mt-1 mb-1 d-flex justify-content-center">
+                {" "}
+                {`Not result found for "` + this.props.searchItem + `".`}
+              </h5>
+            )}
           <hr
             style={{
               color: "gray",
@@ -64,7 +74,7 @@ class Search extends React.Component {
                       }
                     >
                       <div className="mt-3 p-1 d-flex justify-content-center">
-                        <IconButton aria-lable="delete">
+                        <IconButton>
                           <PlayCircleFilledIcon
                             fontSize="large"
                             className="play-button"

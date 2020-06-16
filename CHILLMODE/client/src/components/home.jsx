@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import MDBNavbar from "./navbar";
 import HomePage from "./homepage";
 import Movies from "./movies";
 import Shows from "./shows";
@@ -39,7 +38,7 @@ class Home extends Component {
             path="/shows"
             component={Shows}
           />
-          <Route
+          <PrivateRoute
             isAuthenticated={isAuthenticated}
             exact
             path="/movies/:id"

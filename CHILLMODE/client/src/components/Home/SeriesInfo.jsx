@@ -1,503 +1,293 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { fetchShowById } from "../../actions/showsActions";
+import { Container, Col, Row } from "react-bootstrap";
+import { connect } from "react-redux";
+import ExplicitIcon from "@material-ui/icons/Explicit";
+import SubtitlesRoundedIcon from "@material-ui/icons/SubtitlesRounded";
+import { MDBIcon } from "mdbreact";
+import APSlider from "../slider/slider";
+import "./my.css";
+import { Link } from "react-router-dom";
 // import Footer from "../Layout/Footer"
 
-export default class MovieInfoPage extends Component {
-    constructor(){
-        super();
-        this.state={
-            "SeasonStatus" : true,
-            data :{
-                    "id": 5,
-                    "moviedbId": 1396,
-                    "adult": false,
-                    "posterPath": "/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
-                    "backdropPath": "tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
-                    "name": "Breaking Bad",
-                    "originalTitle": "Breaking Bad",
-                    "overview": "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
-                    "rating": 9,
-                    "language": "English",
-                    "seasons": [
-                        {
-                            "id": 1,
-                            "seasonNumber": 1,
-                            "rating": 9,
-                            "releaseDate": "2009-02-17",
-                            "overview": "High school chemistry teacher Walter White's life is suddenly transformed by a dire medical diagnosis. Street-savvy former student Jesse Pinkman \\\"teaches\\\" Walter a new trade.",
-                            "posterPath": "/1BP4xYv9ZG4ZVHkL7ocOziBbSYH.jpg",
-                            "showId": 5,
-                            "episodes": [
-                                {
-                                    "id": 1,
-                                    "name": "Good Cop Bad Cop",
-                                    "episodeNumber": 1,
-                                    "overview": "Hank and Marie try to spice up their relationship on Valentine's Day.",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/t729tFVXPetnJlJ2VsUZQz0rX6v.jpg",
-                                    "rating": 8,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "Wedding Day",
-                                    "episodeNumber": 2,
-                                    "overview": "Walt and Hank have a talk before Hank gets married.",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/wT62P6ZnjKgZXk0M5hHl4e5zSjB.jpg",
-                                    "rating": 8,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                },
-                                {
-                                    "id": 3,
-                                    "name": "TwaughtHammer",
-                                    "episodeNumber": 3,
-                                    "overview": "Jesse and Badger make a behind the scenes video about their band \"TwaughtHammer\"",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/gUHAqFw3Ptzya96JFFE9xVfMjze.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                },
-                                {
-                                    "id": 4,
-                                    "name": "Marie's Confession",
-                                    "episodeNumber": 4,
-                                    "overview": "Marie records a video diary.",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/saG9GPwRhL21EaHG2d63suGM37W.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                },
-                                {
-                                    "id": 5,
-                                    "name": "The Break-In",
-                                    "episodeNumber": 5,
-                                    "overview": "Walt and Badger attempt to retrieve a vacuum cleaner stuffed with drug money from an elderly woman's locked garage.",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/o8DqThzXelwxV3LLTpHCNHTsTNt.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                },
-                                {
-                                    "id": 6,
-                                    "name": "Jesse Pinkman Evidence Tape",
-                                    "episodeNumber": 6,
-                                    "overview": "Jesse goes on record and describes on camera everything he remembers about Walt's business dealings and criminal activity.",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/o8DqThzXelwxV3LLTpHCNHTsTNt.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                },
-                                {
-                                    "id": 7,
-                                    "name": "Walt's Confession",
-                                    "episodeNumber": 7,
-                                    "overview": "The video confession recorded by Walt.",
-                                    "seasonNumber": 1,
-                                    "stillPath": "/o8DqThzXelwxV3LLTpHCNHTsTNt.jpg",
-                                    "rating": 10,
-                                    "releaseDate": "2009-02-17",
-                                    "seasonId": 1
-                                }
-                            ]
-                        },
-                        {
-                            "id": 3,
-                            "seasonNumber": 2,
-                            "rating": 9.1,
-                            "releaseDate": "2009-03-08",
-                            "overview": "In the second season, Walt must deal with the chain reaction of his choice, as he and Jesse face new and severe consequences. When danger and suspicion around Walt escalate, he is pushed to new levels of desperation. Just how much higher will the stakes rise? How far is Walt willing to go to ensure his family's security? Will his grand plan spiral out of control?",
-                            "posterPath": "/e3oGYpoTUhOFK0BJfloru5ZmGV.jpg",
-                            "showId": 5,
-                            "episodes": [
-                                {
-                                    "id": 1,
-                                    "name": "Pilot",
-                                    "episodeNumber": 1,
-                                    "overview": "When an unassuming high school chemistry teacher discovers he has a rare form of lung cancer, he decides to team up with a former student and create a top of the line crystal meth in a used RV, to provide for his family once he is gone.",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/ydlY3iPfeOAvu8gVqrxPoMvzNCn.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "Cat's in the Bag...",
-                                    "episodeNumber": 2,
-                                    "overview": "Walt and Jesse attempt to tie up loose ends. The desperate situation gets more complicated with the flip of a coin. Walt's wife, Skyler, becomes suspicious of Walt's strange behavior.",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/tjDNvbokPLtEnpFyFPyXMOd6Zr1.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                },
-                                {
-                                    "id": 3,
-                                    "name": "...And the Bag's in the River",
-                                    "episodeNumber": 3,
-                                    "overview": "Walter fights with Jesse over his drug use, causing him to leave Walter alone with their captive, Krazy-8. Meanwhile, Hank has a scared straight moment with Walter Jr. after his aunt discovers he has been smoking pot. Also, Skylar is upset when Walter",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/2kBeBlxGqBOdWlKwzAxiwkfU5on.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                },
-                                {
-                                    "id": 4,
-                                    "name": "Cancer Man",
-                                    "episodeNumber": 4,
-                                    "overview": "Walter finally tells his family that he has been stricken with cancer. Meanwhile, the DEA believes Albuquerque has a new, big time player to worry about. Meanwhile, of a depressed Walter's anger, and Jesse makes a surprise visit to his parents home.",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/i5BAJVhuIWfkoSqDID6FnQNCTVc.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                },
-                                {
-                                    "id": 5,
-                                    "name": "Gray Matter",
-                                    "episodeNumber": 5,
-                                    "overview": "Walter and Skyler attend a former colleague's party. Jesse tries to free himself from the drugs, while Skyler organizes an intervention.",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/82G3wZgEvZLKcte6yoZJahUWBtx.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                },
-                                {
-                                    "id": 6,
-                                    "name": "Crazy Handful of Nothin'",
-                                    "episodeNumber": 6,
-                                    "overview": "Walter and Skyler attend a former colleague's party. Jesse tries to free himself from the drugs, while Skyler organizes an intervention.",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/hyYwqbmcHn3fuxWE3h4IhZZbkU3.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                },
-                                {
-                                    "id": 7,
-                                    "name": "A No-Rough-Stuff-Type Deal",
-                                    "episodeNumber": 7,
-                                    "overview": "Walter accepts his new identity as a drug dealer after a PTA meeting. Elsewhere, Jesse decides to put his aunt's house on the market and Skyler is the recipient of a baby shower.",
-                                    "seasonNumber": 2,
-                                    "stillPath": "/1dgFAsajUpUT7DLXgAxHb9GyXHH.jpg",
-                                    "rating": 9,
-                                    "releaseDate": "2008-01-20",
-                                    "seasonId": 3
-                                }
-                            ]
-                        }
-                    ],
-                    "genres": [
-                        {
-                            "name": "Crime",
-                            "GenreShows": {
-                                "showId": 5,
-                                "genreId": 2
-                            }
-                        },
-                        {
-                            "name": "Drama",
-                            "GenreShows": {
-                                "showId": 5,
-                                "genreId": 3
-                            }
-                        }
-                    ],
-                    "actors": [
-                        {
-                            "name": "Bryan Cranston",
-                            "ActorShows": {
-                                "showId": 5,
-                                "actorId": 1
-                            }
-                        },
-                        {
-                            "name": "Anna Gunn",
-                            "ActorShows": {
-                                "showId": 5,
-                                "actorId": 2
-                            }
-                        },
-                        {
-                            "name": "Aaron Paul",
-                            "ActorShows": {
-                                "showId": 5,
-                                "actorId": 3
-                            }
-                        },
-                        {
-                            "name": "Dean Norris",
-                            "ActorShows": {
-                                "showId": 5,
-                                "actorId": 4
-                            }
-                        },
-                        {
-                            "name": "Bob Odenkirk",
-                            "ActorShows": {
-                                "showId": 5,
-                                "actorId": 5
-                            }
-                        }
-                    ],
-                    "directors": [
-                        {
-                            "name": "Vince Gilligan",
-                            "DirectorShows": {
-                                "showId": 5,
-                                "directorId": 1
-                            }
-                        },
-                        {
-                            "name": "Adam Bernstein",
-                            "DirectorShows": {
-                                "showId": 5,
-                                "directorId": 2
-                            }
-                        },
-                        {
-                            "name": "Bryan Cranston",
-                            "DirectorShows": {
-                                "showId": 5,
-                                "directorId": 3
-                            }
-                        }
-                    ]
-                }
-                        
-        }
-
+class showInfoPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      currentSeason: 0,
+    };
+  }
+  componentDidMount() {
+    let id = this.props.match.params.id;
+    this.props.fetchShowById(id);
+  }
+  componentDidUpdate(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      let id = this.props.match.params.id;
+      this.props.fetchShowById(id);
     }
-
-    handleSeasonSwitch(){
-        console.log("clicked");
-        
-        this.setState({
-            SeasonStatus : true ? false : true 
-        }
-        )
-    }
-    render() {
-        console.log(this.state.SeasonStatus);
-        
-        let EpsiodeList ; 
-        if(this.state.SeasonStatus){
-            EpsiodeList = <div>
-                <div className="row">
-                    <div className="col-sm-7">
-                    <div className="dropdown">
-                <select onChange={()=>this.handleSeasonSwitch()}>
-                    {this.state.data.seasons && this.state.data.seasons.map((val,index)=>{
-                        // console.log(val.seasonNumber);
-                        
-                        return(
-                        <option key={index}>Season {val.seasonNumber}</option>
-                        )
+  }
+  handleSeasonSwitch = (season) => {
+    this.setState({
+      currentSeason: season,
+    });
+  };
+  render() {
+    const { show } = this.props;
+    const { currentSeason } = this.state;
+    return (
+      <Container fluid>
+        <Container fluid style={{ marginLeft: "55px", marginRight: "55px" }}>
+          <Row className="">
+            <Col md="7">
+              <h3 className="white-text mt-5">{show.name}</h3>
+              <div>
+                {show.seasons && show.seasons.length && (
+                  <select
+                    className="btn btn-outline-primary waves-effect mr-2"
+                    onChange={(e) => this.handleSeasonSwitch(e.target.value)}
+                  >
+                    {show.seasons &&
+                      show.seasons.map((val, index) => {
+                        return (
+                          <option key={index} value={index}>
+                            Season {val.seasonNumber}
+                          </option>
+                        );
+                      })}
+                  </select>
+                )}
+                {show.seasons && show.seasons.length && (
+                  <span className="text-muted font-weight-normal mr-2">
+                    IMBD {show.seasons[currentSeason].rating}
+                  </span>
+                )}
+                {show.seasons && !show.seasons.length && (
+                  <span className="text-muted font-weight-normal mr-2">
+                    IMBD {show.rating}
+                  </span>
+                )}
+                <span className="text-muted font-weight-normal mr-2">
+                  {show.releaseDate}
+                </span>
+                <span>
+                  <ExplicitIcon fontSize="" className="mr-2 text-muted" />
+                  <SubtitlesRoundedIcon fontSize="" className="text-muted" />
+                </span>
+                {show.seasons && show.seasons.length && (
+                  <p className="font-weight-normal white-text mt-2">
+                    {show.seasons[currentSeason].overview}
+                  </p>
+                )}
+                {show.seasons && !show.seasons.length && (
+                  <p className="font-weight-normal white-text mt-2">
+                    {show.overview}
+                  </p>
+                )}
+                <div>
+                  <span className="font-weight-bold text-muted mt-4 mr-4">
+                    Director
+                  </span>
+                  {show.directors &&
+                    show.directors.map((val, index) => {
+                      console.log(val);
+                      return (
+                        <span
+                          className="font-weight-bold mt-4"
+                          style={{ color: "#3F729B" }}
+                        >
+                          {val.name},{" "}
+                        </span>
+                      );
                     })}
-                    
-                </select>
-                </div>
-                    <div className="title">
-                    <h2>{this.state.data.name}</h2>
-                    </div>
-                <div className="PosterContainer">
-                    <div className="contents">
-                    <div className="row" id="MovieButtons">
-                    <button className="button play col-sm-1 btn btn-primary"><i class="fa fa-play"></i></button>
-                    <button className="span col-sm-1" id="watchlist">
-                    <span><b>Add to Watchlist</b></span>
-                    </button>
-                    <button className="span col-sm-1" id="trailer">
-                    <span><b>Watch Trailer</b></span>
-                    </button>
-                    </div>
-                    <h4 className="overview">{this.state.data.seasons[0].overview}</h4>
-                    <div className="crew">
-                    <h5>Director : {this.state.data.directors[0].name}</h5>
-                    <h5>Starring : {this.state.data.actors[0].name}</h5>
-                    <h5>Audio Language : {this.state.data.language} </h5>
-                    <h5>Starring : {this.state.data.actors && this.state.data.actors.map((val,index)=>{
-                        // console.log(val)
-                        return(
-                        <span>{val.name},</span>
-                        )
-                        
-                    })}</h5>
-                    <h5>Genres : {this.state.data.genres && this.state.data.genres.map((val,index)=>{
-                        // console.log(val)
-                        return(
-                        <span>{val.name},</span>
-                        )
-                        
-                    })}</h5>
-                    <h5>IMDB Rating : {this.state.data.seasons[0].rating}</h5>
-                    
-                    </div>
-                    
-
-                    </div>
-                    
-
-                </div> 
-                    </div>
-                    <div className="col-sm-4">
-                    <img src={`https://image.tmdb.org/t/p/original${this.state.data.seasons[0].posterPath}`}   alt="Alps" style={{
-                        width: '29rem',
-                        'margin-top': '5rem'
-                        }}></img>
-                    </div>
-
-                </div>
-                
-            <div className="row">
-                <div className="col-sm-11 EPSIODES">
-                 {this.state.data.seasons[0].episodes && this.state.data.seasons[0].episodes.map((val,index)=>{
-                        console.log(val)
-                        return(
-                        <div className="episodes">
-                            <div className="row">
-                                <div className="col-sm-3">
-                                <img src={`https://image.tmdb.org/t/p/original${val.stillPath}`}></img>
-                                </div>
-                            <div className="col-sm-6">
-                            <button className="episode button play col-sm-1 btn btn-primary"><i class="fa fa-play"></i></button>
-                                <span className="episodeName">
-                                <b>{val.id} : {val.name}</b>
-                                </span>
-                                <div className="epsidoeOverview">
-                                    <b> {val.overview} </b>
-                                </div>
-                            </div>
-                            <div className="col-sm-3">
-                            <div className="extraDetails">
-                            <div>Rating :    {val.rating}</div>
-                            <div>ReleaseDate:   {val.releaseDate}</div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                        )
-                        
+                  {show.directors && show.directors.length < 1 && (
+                    <span
+                      className="font-weight-bold"
+                      style={{ color: "#3F729B" }}
+                    >
+                      List not available
+                    </span>
+                  )}
+                  <br />
+                  <span className="font-weight-bold text-muted mr-5">
+                    Actor
+                  </span>
+                  {show.actors &&
+                    show.actors.map((val, index) => {
+                      console.log(val);
+                      return (
+                        <span
+                          className="font-weight-bold"
+                          style={{ color: "#3F729B" }}
+                        >
+                          {val.name},{" "}
+                        </span>
+                      );
                     })}
-                </div>
-
-            </div>
-            </div> 
-        }else{
-            EpsiodeList = <div>
-                <div className="row">
-                    <div className="col-sm-7">
-                    <div className="dropdown">
-                <select onChange={()=>this.handleSeasonSwitch()}>
-                    {this.state.data.seasons && this.state.data.seasons.map((val,index)=>{
-                        // console.log(val.seasonNumber);
-                        
-                        return(
-                        <option key={index}>Season {val.seasonNumber}</option>
-                        )
+                  {show.actors && show.actors.length < 1 && (
+                    <span
+                      className="font-weight-bold"
+                      style={{ color: "#3F729B" }}
+                    >
+                      List not available
+                    </span>
+                  )}
+                  <br />
+                  <span className="font-weight-bold text-muted mr-5">
+                    Genre
+                  </span>
+                  {show.genres &&
+                    show.genres.map((val, index) => {
+                      console.log(val);
+                      return (
+                        <span
+                          className="font-weight-bold"
+                          style={{ color: "#3F729B" }}
+                        >
+                          {val.name},{" "}
+                        </span>
+                      );
                     })}
-                    
-                </select>
+                  {show.genres && show.genres.length < 1 && (
+                    <span
+                      className="font-weight-bold"
+                      style={{ color: "#3F729B" }}
+                    >
+                      List not available
+                    </span>
+                  )}
+                  <br />
+                  <span className="font-weight-bold text-muted mr-4">
+                    Subtitles
+                  </span>
+                  <span
+                    className="font-weight-bold"
+                    style={{ color: "#3F729B" }}
+                  >
+                    {show.language === "en" ? "English" : show.language}
+                  </span>
+                  <br />
+                  <span className="font-weight-bold text-muted mr-4">
+                    Language
+                  </span>
+                  <span
+                    className="font-weight-bold"
+                    style={{ color: "#3F729B" }}
+                  >
+                    {show.language === "en" ? "English" : show.language}
+                  </span>
                 </div>
-                    <div className="title">
-                    <h2>{this.state.data.name}</h2>
-                    </div>
-                <div className="PosterContainer">
-                    <div className="contents">
-                    <div className="row" id="MovieButtons">
-                    <button className="button play col-sm-1 btn btn-primary"><i class="fa fa-play"></i></button>
-                    <button className="span col-sm-1" id="watchlist">
-                    <span><b>Add to Watchlist</b></span>
-                    </button>
-                    <button className="span col-sm-1" id="trailer">
-                    <span><b>Watch Trailer</b></span>
-                    </button>
-                    </div>
-                    <h4 className="overview">{this.state.data.seasons[1].overview}</h4>
-                    <div className="crew">
-                    <h5>Director : {this.state.data.directors[0].name}</h5>
-                    <h5>Starring : {this.state.data.actors[0].name}</h5>
-                    <h5>Audio Language : {this.state.data.language} </h5>
-                    <h5>Starring : {this.state.data.actors && this.state.data.actors.map((val,index)=>{
-                        // console.log(val)
-                        return(
-                        <span>{val.name},</span>
-                        )
-                        
-                    })}</h5>
-                    <h5>Genres : {this.state.data.genres && this.state.data.genres.map((val,index)=>{
-                        // console.log(val)
-                        return(
-                        <span>{val.name},</span>
-                        )
-                        
-                    })}</h5>
-                    <h5>IMDB Rating : {this.state.data.seasons[1].rating}</h5>
-                    
-                    </div>
-                    
-
-                    </div>
-                    
-
-                </div> 
-                    </div>
-                    <div className="col-sm-4">
-                    <img src={`https://image.tmdb.org/t/p/original${this.state.data.seasons[1].posterPath}`}   alt="Alps" style={{
-                        width: '29rem',
-                        'margin-top': '5rem'
-                        }}></img>
-                    </div>
-
+                <div className="form-inline">
+                  <button className="myButton mt-3" title="coming soon">
+                    <MDBIcon
+                      icon="play-circle primary-text hoverable "
+                      size="4x"
+                    />
+                  </button>
+                  <h5 className="white-text font-weight-bolder ml-2 mt-3">
+                    Play
+                  </h5>
+                  {/* <MDBBtn color="primary ml-4 p-3">Add to watchlist</MDBBtn> */}
                 </div>
-                
-            <div className="row">
-                <div className="col-sm-11 EPSIODES">
-                 {this.state.data.seasons[1].episodes && this.state.data.seasons[1].episodes.map((val,index)=>{
-                        console.log(val)
-                        return(
-                        <div className="episodes">
-                            <div className="row">
-                                <div className="col-sm-3">
-                                <img src={`https://image.tmdb.org/t/p/original${val.stillPath}`}></img>
-                                </div>
-                            <div className="col-sm-6">
-                            <button className="episode button play col-sm-1 btn btn-primary"><i class="fa fa-play"></i></button>
-                                <span className="episodeName">
-                                <b>{val.id} : {val.name}</b>
-                                </span>
-                                <div className="epsidoeOverview">
-                                    <b> {val.overview} </b>
-                                </div>
-                            </div>
-                            <div className="col-sm-3">
-                            <div className="extraDetails">
-                            <div>Rating :    {val.rating}</div>
-                            <div>ReleaseDate:   {val.releaseDate}</div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                        )
-                        
-                    })}
+                {show.seasons && !show.seasons.length && (
+                  <div className="mt-2">
+                    <span className="font-weight-bold text-white">Season and episode list not avaiable for this show. Try checking </span>
+                    <Link to="/shows/5" >
+                      <span className="font-weight-bold" >Breaking Bad</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </Col>
+            <Col md="4">
+              {show.seasons && show.seasons.length && (
+                <img
+                  className="infoImage mt-5 float-right"
+                  src={`https://image.tmdb.org/t/p/w500${show.seasons[currentSeason].posterPath}`}
+                  alt="Alps"
+                />
+              )}
+              {show.seasons && !show.seasons.length && (
+                <img
+                  className="infoImage mt-5 float-right"
+                  src={`https://image.tmdb.org/t/p/w500${show.posterPath}`}
+                  alt="Alps"
+                />
+              )}
+            </Col>
+          </Row>
+        </Container>
+        {show.seasons && !show.seasons.length && (
+          <div>
+            {this.props.shows && (
+              <p
+                className="text-white font-weight-bolder text-left mt-4 mb-5"
+                style={{ marginLeft: "55px" }}
+              >
+                {" "}
+                customers also watch{" "}
+              </p>
+            )}
+            {this.props.shows && <APSlider contents={this.props.shows} />}
+          </div>
+        )}
+        <div style={{ marginLeft: "55px", marginRight: "55px" }}>
+          {show.seasons &&
+            show.seasons.length &&
+            show.seasons[currentSeason].episodes &&
+            show.seasons[currentSeason].episodes.map((val, index) => {
+              return (
+                <div className="episodes z-depth-1-half mt-2">
+                  <div className="row">
+                    <div className="col-3">
+                      <img
+                        className="episodes-image"
+                        src={`https://image.tmdb.org/t/p/original${val.stillPath}`}
+                      ></img>
+                    </div>
+                    <div className="col-5">
+                      <button
+                        className="myButton mt-5 mr-2"
+                        title="coming soon"
+                      >
+                        <MDBIcon
+                          icon="play-circle primary-text hoverable "
+                          size="3x"
+                        />
+                      </button>
+                      <span className="font-weight-normal white-text">
+                        <b>
+                          {index + 1} : {val.name}
+                        </b>
+                      </span>
+                      <div className="episodes-overview mt-4 text-muted">
+                        <b> {val.overview} </b>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div className="extraDetails float-left">
+                        <p className="font-weight-normal text-white ml-3">
+                          IMBD : {val.rating}
+                        </p>
+                        <p className="font-weight-normal text-white ml-3">
+                          {val.releaseDate}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-
-            </div>
-            </div>
-        }
-        return (
-            <div className="bgBody">
-                {EpsiodeList}
-            </div>
-        )
-    }
+              );
+            })}
+        </div>
+      </Container>
+    );
+  }
 }
+const stateMapper = (state) => {
+  return {
+    show: state.shows.show,
+    shows: state.shows.shows,
+  };
+};
+
+export default connect(stateMapper, { fetchShowById })(showInfoPage);

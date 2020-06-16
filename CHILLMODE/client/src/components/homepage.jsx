@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import APSlider from './slider/slider'
 import APSliderTwo from './slider/slider2'
 import APCarousel from './slider/carousel'

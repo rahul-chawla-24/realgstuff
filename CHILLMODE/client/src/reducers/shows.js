@@ -2,12 +2,15 @@ const initialState = {
   shows: [],
   crime: [],
   drama: [],
+  show: {},
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case "SHOWSPAGE_FETCHED":
       return { ...state, shows: action.payload };
+    case "SHOWINFO":
+      return { ...state, show: action.payload };
     case "DRAMA_SHOWS":
       let dramashows = [];
       state.shows.forEach((show) => {

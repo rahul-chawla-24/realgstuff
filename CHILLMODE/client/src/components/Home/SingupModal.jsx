@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { register } from "../../actions/authActions";
+import { clearErrors } from "../../actions/errorActions";
 import {
   MDBContainer,
   MDBRow,
@@ -35,37 +36,31 @@ class SignupModal extends Component {
     });
   }
   handleFirstNamechange(event) {
+    this.props.clearErrors();
     this.setState({
       firstName: event.target.value,
     });
   }
   handleLastNamechange(event) {
+    this.props.clearErrors();
     this.setState({
       lastName: event.target.value,
     });
   }
   handleEmailchange(event) {
+    this.props.clearErrors();
     this.setState({
       email: event.target.value,
     });
   }
   handlePasswordchange(event) {
+    this.props.clearErrors();
     this.setState({
       password: event.target.value,
     });
   }
   handleSubmit() {
-    console.log(this.state);
-    console.log(register);
     const { firstName, lastName, email, password } = this.state;
-    if (!firstName || !lastName || !email || !password) {
-      alert("please enter all details");
-      return;
-    }
-    if (password.length < 8) {
-      alert("password length must be of 8 digits");
-      return;
-    }
     this.props.register({ firstName, lastName, email, password });
   }
   render() {
@@ -147,9 +142,16 @@ class SignupModal extends Component {
                     </div>
                   </form>
                   <div>
+                    {this.props.msg && (
+                      <MDBAlert color="danger" className="mt-2">
+                        {this.props.msg}
+                      </MDBAlert>
+                    )}
+                  </div>
+                  <div>
                     {this.props.registerMessage && (
                       <MDBAlert color="success" className="mt-2">
-                        User registered. Please login to continue
+                        {this.props.registerMessage}
                       </MDBAlert>
                     )}
                   </div>
@@ -167,7 +169,8 @@ const mapstatetoprops = (state) => {
   //   Newstate : state
   return {
     registerMessage: state.auth.registerMessage,
+    msg: state.error.msg,
   };
 };
 
-export default connect(mapstatetoprops, { register })(SignupModal);
+export default connect(mapstatetoprops, { register, clearErrors })(SignupModal);

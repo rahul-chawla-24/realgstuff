@@ -67,6 +67,15 @@ import {
           isAuthenticated: false,
           isLoading: false
         };
+        case "GUEST_LOGIN":
+          console.log(action.payload);
+          localStorage.setItem('token', action.payload.token);
+          return {
+            ...state,
+            user : { name : "Guest"},
+            isAuthenticated: true,
+            isLoading: false
+          };
       default:
         return state;
     }
