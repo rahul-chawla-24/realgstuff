@@ -1,0 +1,99 @@
+{
+  "candidates": [
+    {
+      "id": 1,
+      "name": "Rahul Chawla",
+      "role": "FULL STACK",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "applicationId": 1
+    },
+    {
+      "id": 2,
+      "name": "IKKA",
+      "role": "FRONT END",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "applicationId": 2
+    },
+    {
+      "id": 3,
+      "name": "DIVINE",
+      "role": "BACKEND NODE.JS",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "applicationId": null
+    },
+    {
+      "id": 4,
+      "name": "LIL GOLU",
+      "role": "DIGITAL MARKETING",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "applicationId": null
+    }
+  ],
+  "applications": [
+    {
+      "id": 1,
+      "name": "Rahul Chawla",
+      "role": "FULL STACK",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "answers": [
+        {
+          "questionId": 1,
+          "question": "How much experience You have with Node ?",
+          "answer": "1 YEAR"
+        },
+        {
+          "questionId": 2,
+          "question": "How much experience You have Express ?",
+          "answer": "1 YEAR"
+        },
+        {
+          "questionId": 3,
+          "question": "How much experience You have MongoDB ?",
+          "answer": "1 YEAR"
+        },
+        {
+          "questionId": 4,
+          "question": "How much experience You have React ?",
+          "answer": "1 YEAR"
+        }
+      ],
+      "candidateId": 1
+    },
+    {
+      "id": 2,
+      "name": "IKKA",
+      "role": "FRONT END",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+
+      "answers": [
+        {
+          "questionId": 1,
+          "question": "How much experience You have with Node ?",
+          "answer": "2 YEAR"
+        },
+        {
+          "questionId": 2,
+          "question": "How much experience You have Express ?",
+          "answer": "2 YEAR"
+        },
+        {
+          "questionId": 3,
+          "question": "How much experience You have MongoDB ?",
+          "answer": "2 YEAR"
+        },
+        {
+          "questionId": 4,
+          "question": "How much experience You have React ?",
+          "answer": "2 YEAR"
+        }
+      ],
+      "candidateId": 2
+    }
+  ],
+  "questions": [
+    { "id": 1, "question": "How much experience You have with Node ?" },
+    { "id": 2, "question": "How much experience You have Express ?" },
+    { "id": 3, "question": "How much experience You have MongoDB ?" },
+    { "id": 4, "question": "How much experience You have React ?" }
+  ]
+}
