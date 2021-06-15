@@ -34,7 +34,7 @@ exports.createAlertLog = async (req, res) => {
 
 exports.getAlertByBranch = async (io,data) => {
   const { id , role } = data;
-
+  console.log("here")
   if( role.type === "admin"){
     let branchalerts = await BranchAlerts.findAll({
       where: {
@@ -53,7 +53,7 @@ exports.getAlertByBranch = async (io,data) => {
   }
   const branch = await Branch.findOne({
     where: {
-      id,
+      id: 1,
     },
   });
   let branchalerts = await BranchAlerts.findAll({
@@ -66,6 +66,10 @@ exports.getAlertByBranch = async (io,data) => {
       message: `No alerts found with your branch`,
     } );
   }
+  console.log("here",{
+    data: branchalerts,
+    message: "success"
+  })
   io.emit('alert',{
     data: branchalerts,
     message: "success"
