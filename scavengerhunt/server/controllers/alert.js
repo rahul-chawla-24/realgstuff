@@ -34,7 +34,7 @@ exports.createAlertLog = async (req, res) => {
 
 exports.getAlertByBranch = async (io,data) => {
   const { id , role } = data;
-  console.log("here")
+
   if( role.type === "admin"){
     let branchalerts = await BranchAlerts.findAll({
       where: {
@@ -46,7 +46,7 @@ exports.getAlertByBranch = async (io,data) => {
         message: `No alerts found with your branch`,
       } );
     }
-    io.emit('alert',{
+    io.emit('getAlerts',{
       data: branchalerts,
       message: "success"
     });
@@ -66,15 +66,28 @@ exports.getAlertByBranch = async (io,data) => {
       message: `No alerts found with your branch`,
     } );
   }
-  console.log("here",{
-    data: branchalerts,
-    message: "success"
-  })
   io.emit('alert',{
     data: branchalerts,
     message: "success"
   });
 };
+
+exports.getAlertByBranchApi = async (req,res) => {
+  const { branchId , role } = req.params;
+
+  if( role === "admin"){
+    let branchalerts = await BranchAlerts.findAll()
+    return res.send(branchalerts);
+  }
+
+  let branchalerts = await BranchAlerts.findAll({
+    where: {
+      branchId: branchId
+    }
+  })
+  return res.send(branchalerts);
+};
+
 
 exports.getAlert = async (req, res) => {
   const { id } = req.params;

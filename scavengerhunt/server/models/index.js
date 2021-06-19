@@ -53,10 +53,13 @@ const Pincode = db.define('pincode', {
   timestamps: false,
 });
 
-const Alert= db.define('alert', {
+const Alert = db.define('alert', {
   text: {
     type: Sequelize.STRING,
   },
+  active: {
+     type: Sequelize.BOOLEAN
+  }
 });
 
 const BranchAlerts = db.define("BranchAlerts", {

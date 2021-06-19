@@ -5,7 +5,7 @@ const userRoutes = require('./routes/user');
 const branchRoutes = require('./routes/branch')
 const { getAlertByBranch } = require("./controllers/alert")
 const alertRoutes = require("./routes/alert")
-
+const cors = require('cors')
 db.authenticate()
   .then(() => console.log('Database connected...'))
   .catch(err => console.log('Error: ' + err))
@@ -17,29 +17,24 @@ const server = http.createServer(app);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors())
 app.use('/user', userRoutes);
 app.use('/branch', branchRoutes);
 app.use('/alert', alertRoutes);
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "http://localhost:3000",
-     methods: ["GET", "POST"],
-     allowedHeaders: ["my-custom-header"],
-      credentials: true
-    }
+    origin: "*",
   }
+}
 );
 
 io.on("connection", (client) => {
   console.log("New client connected");
-
-
-  client.on("joins", () => {
-    io.emit({joins: []})
-   })
-
+  client.on("sendBranch",(data) => {
+    setInterval(() => {getAlertByBranch(io,data)},5000)
+ 
+  })
 });
 
 

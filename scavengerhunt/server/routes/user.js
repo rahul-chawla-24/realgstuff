@@ -6,4 +6,6 @@ const upload = multer({ dest: 'uploads/' });
 
 router.post("/csv",upload.single("uploadCsv"),user.importCsv);
 router.get("/:id",user.getUser);
+router.post("/auth",user.login);
+
 module.exports = router
