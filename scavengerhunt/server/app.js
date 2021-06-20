@@ -5,6 +5,8 @@ const userRoutes = require('./routes/user');
 const branchRoutes = require('./routes/branch')
 const { getAlertByBranch } = require("./controllers/alert")
 const alertRoutes = require("./routes/alert")
+const pincodeRoutes = require("./routes/pincode")
+
 const cors = require('cors')
 db.authenticate()
   .then(() => console.log('Database connected...'))
@@ -21,6 +23,7 @@ app.use(cors())
 app.use('/user', userRoutes);
 app.use('/branch', branchRoutes);
 app.use('/alert', alertRoutes);
+app.use('/pincode', pincodeRoutes);
 
 const io = require("socket.io")(server, {
   cors: {
@@ -29,14 +32,22 @@ const io = require("socket.io")(server, {
 }
 );
 
-io.on("connection", (client) => {
-  console.log("New client connected");
-  client.on("sendBranch",(data) => {
-    setInterval(() => {getAlertByBranch(io,data)},5000)
- 
-  })
-});
+var interval;
 
+io.on("connection", (client) => {
+
+  client.on("sendBranch",(data) => {
+     interval = setInterval(() => { getAlertByBranch(io,data)} ,5000)
+  })
+
+  client.on("stopSendingBranch",() => {
+    console.log("interval",interval)
+    if(interval){
+    clearInterval(interval);
+    }
+  })
+  
+});
 
 
 const PORT = process.env.PORT || 5000;

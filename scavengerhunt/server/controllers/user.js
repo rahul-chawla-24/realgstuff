@@ -136,6 +136,20 @@ exports.login = async (req, res) => {
         username,
         password,
       },
+      include: [
+        {
+          model: Branch,
+          include: [
+            {
+              model: Pincode,
+              as: "pincodes",
+            },
+          ],
+        },
+        {
+          model: Role,
+        },
+      ],
     });
 
     if (!user) {

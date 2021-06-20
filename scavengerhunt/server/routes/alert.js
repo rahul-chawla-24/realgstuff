@@ -3,7 +3,7 @@ var express = require('express')
 var router = express.Router()
 
 router.post("/create",alert.createAlertLog);
-router.get("/:id",alert.getAlert);
-router.get('/branch_alert',alert.getAlertByBranchApi)
+router.get("/",alert.getAlertByBranch);
+
 
 module.exports = router
